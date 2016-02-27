@@ -30,7 +30,7 @@
         <h4>Article System</h4>
     </div>
 
-    <!-- NEW COMMENT FORM =============================================== -->
+    <!-- NEW Article FORM =============================================== -->
     <form ng-submit="submitArticle()"> <!-- ng-submit will disable the default form action and use our function -->
 
         <!-- AUTHOR -->
@@ -38,7 +38,7 @@
             <input type="text" class="form-control input-sm" name="author" ng-model="articleData.author" placeholder="Name">
         </div>
 
-        <!-- COMMENT TEXT -->
+        <!-- Article TEXT -->
         <div class="form-group">
             <input type="text" class="form-control input-lg" name="content" ng-model="articleData.text" placeholder="Say what you have to say">
         </div>
@@ -53,8 +53,8 @@
     <!-- show loading icon if the loading variable is set to true -->
     <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
 
-    <!-- THE COMMENTS =============================================== -->
-    <!-- hide these comments if the loading variable is true -->
+    <!-- THE ArticleS =============================================== -->
+    <!-- hide these Articles if the loading variable is true -->
     <div class="article" ng-hide="loading" ng-repeat="article in articles">
         <h3>Article #{{ article.id }} <small>by {{ article.author }}</h3>
         <p>{{ article.content }}</p>

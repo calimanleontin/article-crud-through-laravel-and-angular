@@ -1,16 +1,16 @@
 angular.module('mainCtrl', [])
 
-    // inject the Comment service into our controller
+    // inject the Article service into our controller
     .controller('mainController', function($scope, $http, Article) {
-        // object to hold all the data for the new comment form
+        // object to hold all the data for the new Article form
         $scope.articleData = {};
 
         // loading variable to show the spinning loading icon
         $scope.loading = true;
 
-        // get all the comments first and bind it to the $scope.comments object
+        // get all the Articles first and bind it to the $scope.Articles object
         // use the function we created in our service
-        // GET ALL COMMENTS ==============
+        // GET ALL ArticleS ==============
         Article.get()
             .success(function(data) {
                 $scope.articles = data;
@@ -18,16 +18,16 @@ angular.module('mainCtrl', [])
             });
 
         // function to handle submitting the form
-        // SAVE A COMMENT ================
+        // SAVE A Article ================
         $scope.submitArticle = function() {
             $scope.loading = true;
 
-            // save the comment. pass in comment data from the form
+            // save the Article. pass in Article data from the form
             // use the function we created in our service
             Article.save($scope.articleData)
                 .success(function(data) {
 
-                    // if successful, we'll need to refresh the comment list
+                    // if successful, we'll need to refresh the Article list
                     Article.get()
                         .success(function(getData) {
                             $scope.articles = getData;
@@ -40,8 +40,8 @@ angular.module('mainCtrl', [])
                 });
         };
 
-        // function to handle deleting a comment
-        // DELETE A COMMENT ====================================================
+        // function to handle deleting a Article
+        // DELETE A Article ====================================================
         $scope.deleteArticle = function(id) {
             $scope.loading = true;
 
@@ -49,7 +49,7 @@ angular.module('mainCtrl', [])
             Article.destroy(id)
                 .success(function(data) {
 
-                    // if successful, we'll need to refresh the comment list
+                    // if successful, we'll need to refresh the Article list
                     Article.get()
                         .success(function(getData) {
                             $scope.articles = getData;

@@ -1,46 +1,62 @@
-angular.module('angularCtrl', [])
+angular.module('mainCtrl', [])
 
-.controller('mainController', function($scope, $http, Article){
-    $scope.articleData = {};
+    // inject the Comment service into our controller
+    .controller('mainController', function($scope, $http, Article) {
+        // object to hold all the data for the new comment form
+        $scope.articleData = {};
 
-    $scope.loading = true;
-
-    Article.get()
-        .success(function(data){
-            $scope.articles = data;
-            $scope.loading = false;
-        });
-
-
-    $scope.submitArticle = function(){
+        // loading variable to show the spinning loading icon
         $scope.loading = true;
 
-        Article.save($scope.articleData)
-            .success(function(data){
-
-                Article.get()
-                    .success(function(getData){
-                        $scope.articles = getData;
-                        $scope.loading = false;
-                    });
-            })
-
-            .error(function(data){
-                console.log(data);
+        // get all the comments first and bind it to the $scope.comments object
+        // use the function we created in our service
+        // GET ALL COMMENTS ==============
+        Article.get()
+            .success(function(data) {
+                $scope.articles = data;
+                $scope.loading = false;
             });
-    };
 
-    $scope.deleteArticle = function(id){
-        $scope.loading = true;
+        // function to handle submitting the form
+        // SAVE A COMMENT ================
+        $scope.submitArticle = function() {
+            $scope.loading = true;
 
-        Article.destroy(id)
-            .success(function(data){
+            // save the comment. pass in comment data from the form
+            // use the function we created in our service
+            Article.save($scope.articleData)
+                .success(function(data) {
 
-                Article.get()
-                    .success(function (getData) {
-                        $scope.articles = getData;
-                        $scope.loading = false;
-                    });
-            });
-    };
-});
+                    // if successful, we'll need to refresh the comment list
+                    Article.get()
+                        .success(function(getData) {
+                            $scope.articles = getData;
+                            $scope.loading = false;
+                        });
+
+                })
+                .error(function(data) {
+                    console.log(data);
+                });
+        };
+
+        // function to handle deleting a comment
+        // DELETE A COMMENT ====================================================
+        $scope.deleteArticle = function(id) {
+            $scope.loading = true;
+
+            // use the function we created in our service
+            Article.destroy(id)
+                .success(function(data) {
+
+                    // if successful, we'll need to refresh the comment list
+                    Article.get()
+                        .success(function(getData) {
+                            $scope.articles = getData;
+                            $scope.loading = false;
+                        });
+
+                });
+        };
+
+    });

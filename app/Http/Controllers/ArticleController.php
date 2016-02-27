@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
 use \Response;
-use \Input;
+use App\Article;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Response::json(Comment::get());
+        return \Response::json(Article::get());
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleController extends Controller
     {
         Article::create(array(
             'author' => Input::get('author'),
-            'text' => Input::get('text')
+            'content' => Input::get('text')
         ));
 
         return Response::json(array('success' => true));

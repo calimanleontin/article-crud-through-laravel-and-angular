@@ -19,6 +19,10 @@ angular.module('articleService', [])
 
             destroy : function(id) {
                 return $http.delete('/api/articles/' + id);
+            },
+
+            increse : function(id){
+                return $http.get('api/articles/increase/' + id);
             }
         }
     });

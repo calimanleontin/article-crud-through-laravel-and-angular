@@ -18,7 +18,7 @@ class Article extends Migration
             $table->string('slug');
             $table->string('author');
             $table->text('content');
-            $table->integer('visitors');
+            $table->integer('visitors')->unsigned()->default(0);
             $table->timestamps();
         });
     }

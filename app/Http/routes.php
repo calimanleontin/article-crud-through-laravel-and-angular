@@ -36,6 +36,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('articles', 'ArticleController',
             array('only' => array('index', 'store', 'destroy')));
 
+        Route::get('/articles/increase/{id}', 'ArticleController@increase');
+
     });
 
 

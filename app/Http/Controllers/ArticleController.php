@@ -48,4 +48,15 @@ class ArticleController extends Controller
 
         return Response::json(array('success' => true));
     }
+
+    public function increase($id)
+    {
+        $article = Article::find($id);
+
+        $article->visitors += 1;
+
+        $article->save();
+
+        return Response::json(array('success' => true));
+    }
 }

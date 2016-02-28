@@ -67,7 +67,7 @@
     <!-- hide these Articles if the loading variable is true -->
     <div class="article" ng-hide="loading" ng-repeat="article in articles">
         <h3>Article #{{ article.id }} <small>by {{ article.author }}</h3>
-        <p>{{ article.content }}</p>
+        <p>{{ article.content }}</p> <p>view by {{article.visitors}} times.</p>
 
         <ul class="list-inline" >
 

@@ -21,7 +21,7 @@ angular.module('articleService', [])
                 return $http.delete('/api/articles/' + id);
             },
 
-            increse : function(id){
+            increase : function(id){
                 return $http.get('api/articles/increase/' + id);
             }
         }

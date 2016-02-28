@@ -38,4 +38,17 @@ angular.module('mainCtrl', [])
                         });
                 });
         }
+
+        $scope.increaseVisitors = function(id){
+            $scope.loading = true;
+
+            Article.increase(id)
+                .success(function(data){
+                    Article.get()
+                        .success(function(getData){
+                            $scope.articles = getData;
+                            $scope.loading = false;
+                        });
+                });
+        }
     });
